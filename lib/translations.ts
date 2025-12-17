@@ -50,8 +50,8 @@ export const translations = {
         // Home
         heroTitlePrefix: "iRacing",
         heroTitleSuffix: "终极百科",
-        heroSubtitle: "搜索赛车、赛道、调校和社区工具。",
-        searchPlaceholder: "搜索赛车、赛道、设置...",
+        heroSubtitle: "搜索游戏问题、赛车、赛道、调校和社区工具。",
+        searchPlaceholder: "搜索游戏问题、赛车、赛道、设置...",
         featuredTitle: "精选资源",
         featuredSubtitle: "每一位模拟赛车手的必备工具。",
         card1Title: "中文语音包",
@@ -160,8 +160,8 @@ export const translations = {
         // Home
         heroTitlePrefix: "The Ultimate",
         heroTitleSuffix: "Encyclopedia",
-        heroSubtitle: "Search for cars, tracks, setups, and community tools.",
-        searchPlaceholder: "Search for cars, tracks, setups...",
+        heroSubtitle: "Search for game problems, cars, tracks, setups, and community tools.",
+        searchPlaceholder: "Search for game problems, cars, tracks, setups...",
         featuredTitle: "Featured Resources",
         featuredSubtitle: "Essential tools and third-party software for every sim racer.",
         card1Title: "Chinese Voice Pack",

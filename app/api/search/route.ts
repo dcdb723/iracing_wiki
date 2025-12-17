@@ -52,27 +52,25 @@ export async function POST(req: Request) {
         // B. Keyword Search (Literal) - Only if it's a text query (not purely image-based inference, though we could)
         // If it's an image search, 'searchHash' is the AI description, which might be too long for an ilike query.
         // So we only do keyword search if the user typed something or the query is short.
-        if (!image && query.length > 2) {
+        if (!image && query.length >= 2) {
             const { data: keyData } = await supabase
                 .from('wiki_entries')
                 .select('*')
-                .or(`title.ilike.%${query}%,category.ilike.%${query}%`)
+                .or(`title.ilike.%${query}%,category.ilike.%${query}%,content.ilike.%${query}%`)
                 .limit(5);
             if (keyData) keywordResults = keyData;
         }
 
         // 3. Combine & Deduplicate
-        // We prioritize Semantic results, then append Keyword results that aren't already there.
+        // We prioritize Keyword results (exact match), then append Semantic results that aren't already there.
         const combinedMap = new Map();
 
-        // Add Semantic matches first
-        semanticResults.forEach((item: any) => combinedMap.set(item.id, item));
+        // Add Keyword matches first (exact/partial match has higher priority)
+        keywordResults.forEach((item: any) => combinedMap.set(item.id, item));
 
-        // Add Keyword matches
-        keywordResults.forEach((item: any) => {
-            if (!combinedMap.has(item.id)) {
-                combinedMap.set(item.id, item);
-            }
+        // Add Semantic matches (if not already present)
+        semanticResults.forEach((item: any) => {
+            if (!combinedMap.has(item.id)) combinedMap.set(item.id, item);
         });
 
         const finalResults = Array.from(combinedMap.values());
