@@ -2,7 +2,7 @@
 
 An intelligent, bilingual encyclopedia and resource hub for the iRacing simulator community. Built with Next.js 14, Supabase, and AI-powered semantic search.
 
-![iRacing Wiki Screenshot](./public/screenshot.png) 
+![iRacing Wiki Screenshot](./public/screenshot-20251217.png) 
 *(If you have a screenshot, place it in public/screenshot.png, otherwise remove this line)*
 
 ## 🌟 Key Features

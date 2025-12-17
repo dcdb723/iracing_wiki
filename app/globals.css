@@ -1,10 +1,16 @@
 @import "tailwindcss";
 
 @theme {
-  --color-brand-red: #ef4444;    /* red-500 */
-  --color-brand-blue: #3b82f6;   /* blue-500 */
-  --color-brand-dark: #0f172a;   /* slate-900 */
-  --color-brand-darker: #020617; /* slate-950 */
+  --font-sans: var(--font-inter);
+  --font-heading: var(--font-outfit);
+  --color-brand-red: #ef4444;
+  /* red-500 */
+  --color-brand-blue: #3b82f6;
+  /* blue-500 */
+  --color-brand-dark: #0f172a;
+  /* slate-900 */
+  --color-brand-darker: #020617;
+  /* slate-950 */
 }
 
 /* Custom Utilities */

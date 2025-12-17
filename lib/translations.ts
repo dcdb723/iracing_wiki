@@ -5,7 +5,7 @@ export const translations = {
         home: "首页",
         search: "搜索",
         back: "返回",
-        backToSearch: "返回搜索",
+        backToSearch: "返回",
         language: "语言",
         loading: "加载中...",
 
@@ -52,7 +52,7 @@ export const translations = {
         home: "Home",
         search: "Search",
         back: "Back",
-        backToSearch: "Back to Search",
+        backToSearch: "Back",
         language: "Language",
         loading: "Loading...",
 

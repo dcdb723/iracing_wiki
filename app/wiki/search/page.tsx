@@ -5,6 +5,7 @@ import { useSearchParams } from 'next/navigation';
 import { useEffect, useState, Suspense } from 'react';
 import { Search, Loader2, ArrowRight, ExternalLink, Home, ArrowLeft, Globe } from 'lucide-react';
 import { useLanguage } from '@/context/LanguageContext';
+import WikiFooter from '@/components/WikiFooter';
 
 function SearchResults() {
     const searchParams = useSearchParams();
@@ -164,7 +165,9 @@ function SearchResults() {
                         </div>
                     </div>
                 )}
+
             </div>
+            <WikiFooter />
         </main>
     );
 }

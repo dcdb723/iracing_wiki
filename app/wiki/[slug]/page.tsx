@@ -9,6 +9,7 @@ import remarkBreaks from 'remark-breaks';
 import BackButton from '@/components/BackButton';
 import WikiNav from '@/components/WikiNav';
 import WikiHeader from '@/components/WikiHeader';
+import WikiFooter from '@/components/WikiFooter';
 
 // Generate Metadata for SEO
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
@@ -40,7 +41,7 @@ export default async function WikiEntryPage({ params }: { params: Promise<{ slug
     const normalizedContent = entry.content ? entry.content.replace(/\\n/g, '\n') : '';
 
     return (
-        <main className="min-h-screen bg-slate-950">
+        <main className="min-h-screen bg-slate-950 flex flex-col">
             {/* Navigation - Client Component for Language state */}
             <WikiNav />
 
@@ -53,7 +54,7 @@ export default async function WikiEntryPage({ params }: { params: Promise<{ slug
             />
 
             {/* Content */}
-            <article className="max-w-4xl mx-auto px-6 py-12">
+            <article className="max-w-4xl mx-auto px-6 py-12 flex-1 w-full">
                 <div className="prose prose-invert prose-lg max-w-none">
                     <ReactMarkdown
                         remarkPlugins={[remarkGfm, remarkBreaks]}
@@ -75,6 +76,7 @@ export default async function WikiEntryPage({ params }: { params: Promise<{ slug
                     </ReactMarkdown>
                 </div>
             </article>
+            <WikiFooter />
         </main>
     );
 }

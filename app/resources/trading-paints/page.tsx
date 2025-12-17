@@ -6,6 +6,7 @@ import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import remarkBreaks from 'remark-breaks';
 import WikiNav from '@/components/WikiNav';
+import WikiFooter from '@/components/WikiFooter';
 import { useLanguage } from '@/context/LanguageContext';
 
 export default function TradingPaintsPage() {
@@ -56,7 +57,7 @@ export default function TradingPaintsPage() {
             {/* Hero / Header */}
             <div className="relative">
                 {/* Header Image */}
-                <div className="w-full h-[40vh] md:h-[50vh] relative bg-slate-900 overflow-hidden">
+                <div className="w-full h-[30vh] md:h-[40vh] relative bg-slate-900 overflow-hidden">
                     <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-slate-950 z-10" />
                     {/* Placeholder Pattern */}
                     <div className="absolute inset-0 opacity-20 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-brand-red via-slate-900 to-slate-950"></div>
@@ -104,6 +105,7 @@ export default function TradingPaintsPage() {
                     </ReactMarkdown>
                 </div>
             </article>
+            <WikiFooter />
         </main>
     );
 }

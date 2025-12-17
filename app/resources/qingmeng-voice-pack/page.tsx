@@ -6,6 +6,7 @@ import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import remarkBreaks from 'remark-breaks';
 import WikiNav from '@/components/WikiNav';
+import WikiFooter from '@/components/WikiFooter';
 import { useLanguage } from '@/context/LanguageContext';
 import qingmengBg from './qingmeng.jpg';
 
@@ -39,12 +40,21 @@ export default function QingmengVoicePage() {
             {/* Hero / Header */}
             <div className="relative">
                 {/* Header Image */}
-                <div className="w-full h-[40vh] md:h-[50vh] relative bg-slate-900 overflow-hidden">
-                    <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-slate-950 z-10" />
+                <div className="w-full h-[30vh] md:h-[40vh] relative bg-slate-950 overflow-hidden">
+                    {/* Blurred Background Layer */}
+                    <div
+                        className="absolute inset-0 bg-cover bg-center blur-3xl scale-110 opacity-50"
+                        style={{ backgroundImage: `url(${qingmengBg.src})` }}
+                    />
+
+                    {/* Gradient Overlay */}
+                    <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-slate-950 z-20" />
+
+                    {/* Main Image */}
                     <img
                         src={qingmengBg.src}
                         alt="Qingmeng Voice Pack"
-                        className="w-full h-full object-cover"
+                        className="relative z-10 w-full h-full object-contain shadow-2xl drop-shadow-2xl"
                     />
                 </div>
 
@@ -84,6 +94,7 @@ export default function QingmengVoicePage() {
                     </ReactMarkdown>
                 </div>
             </article>
+            <WikiFooter />
         </main>
     );
 }

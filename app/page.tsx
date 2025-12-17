@@ -58,10 +58,10 @@ export default function Home() {
   return (
     <main className="flex flex-col min-h-screen">
       {/* Navigation */}
-      <nav className="flex items-center justify-between px-6 py-4 border-b border-slate-800 bg-brand-darker/50 backdrop-blur-md sticky top-0 z-50">
+      <nav className="flex items-center justify-between px-6 py-3 border-b border-slate-800 bg-brand-darker/50 backdrop-blur-md sticky top-0 z-50">
         <div className="flex items-center gap-2">
           <div className="w-8 h-8 bg-brand-red skew-x-[-12deg] flex items-center justify-center font-bold italic text-white rounded-sm">iR</div>
-          <span className="text-xl font-bold tracking-tight italic">iRacing<span className="text-slate-400 font-normal ml-1">Wiki</span></span>
+          <span className="text-xl font-bold tracking-tight">iRacing<span className="text-slate-400 font-normal ml-1">Wiki</span></span>
         </div>
         <div className="flex items-center gap-4">
           <button
@@ -75,16 +75,18 @@ export default function Home() {
       </nav>
 
       {/* Hero Section */}
-      <section className="flex-1 flex flex-col items-center justify-center px-4 py-20 text-center space-y-8 relative overflow-hidden">
+      <section className="flex-1 flex flex-col items-center justify-center px-4 py-8 md:py-10 text-center space-y-6 relative overflow-hidden min-h-0">
 
-        {/* Decorative Background Elements */}
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-brand-blue/5 rounded-full blur-3xl pointer-events-none" />
-        <div className="absolute top-1/4 right-0 w-[400px] h-[400px] bg-brand-red/5 rounded-full blur-3xl pointer-events-none" />
+        {/* Decorative Background Elements - Scaled down */}
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-brand-blue/5 rounded-full blur-3xl pointer-events-none" />
+        <div className="absolute top-1/4 right-0 w-[300px] h-[300px] bg-brand-red/5 rounded-full blur-3xl pointer-events-none" />
 
-        <h1 className="text-5xl md:text-7xl font-extrabold tracking-tight relative z-10">
+        <img src="/logo.png" alt="iRacing Wiki Logo" className="w-24 h-24 md:w-32 md:h-32 object-contain relative z-10 mb-2 rounded-[2rem] shadow-2xl shadow-brand-red/20 border-2 border-slate-800/50" />
+
+        <h1 className="text-4xl md:text-5xl font-extrabold tracking-tight relative z-10">
           {lang === 'en' ? (
             <>
-              {t.heroTitlePrefix} <br />
+              {t.heroTitlePrefix} <br className="hidden md:block" />
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-red to-brand-blue italic pr-2">iRacing</span>
               {t.heroTitleSuffix}
             </>
@@ -95,7 +97,7 @@ export default function Home() {
             </>
           )}
         </h1>
-        <p className="text-lg md:text-xl text-slate-400 max-w-2xl relative z-10">
+        <p className="text-base md:text-lg text-slate-400 max-w-2xl relative z-10">
           {t.heroSubtitle}
         </p>
 
@@ -111,74 +113,52 @@ export default function Home() {
               placeholder={t.searchPlaceholder}
               className="flex-1 bg-transparent border-none outline-none text-lg text-white placeholder:text-slate-600 h-10"
             />
-            {/* Image Search Hidden by User Request
-            <div className="flex items-center gap-2">
-              <input
-                type="file"
-                ref={fileInputRef}
-                onChange={handleImageUpload}
-                className="hidden"
-                accept="image/*"
-              />
-              <button
-                type="button"
-                onClick={() => fileInputRef.current?.click()}
-                disabled={isSearching}
-                className="flex items-center gap-2 bg-slate-900 hover:bg-slate-800 text-slate-300 px-4 py-2 rounded-lg border border-slate-800 transition-all disabled:opacity-50"
-              >
-                {isSearching ? <Loader2 className="w-5 h-5 animate-spin text-brand-blue" /> : <Camera className="w-5 h-5 text-brand-blue" />}
-                <span className="hidden sm:inline text-sm font-medium">
-                  {isSearching ? 'Analyzing...' : 'Image Search'}
-                </span>
-              </button>
-            </div>
-            */}
           </form>
         </div>
 
       </section>
 
       {/* Featured Resources Section */}
-      <section id="resources" className="py-20 bg-slate-950/50 px-4">
-        <div className="max-w-6xl mx-auto space-y-12">
-          <div className="text-center space-y-4">
-            <h2 className="text-3xl font-bold">{t.featuredTitle}</h2>
-            <p className="text-slate-400">{t.featuredSubtitle}</p>
+      <section id="resources" className="pt-4 pb-8 bg-slate-950/50 px-4">
+        <div className="max-w-6xl mx-auto space-y-8">
+          <div className="text-center space-y-2">
+            <h2 className="text-2xl font-bold">{t.featuredTitle}</h2>
+            <p className="text-slate-400 text-sm">{t.featuredSubtitle}</p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
 
             {/* Card 1 */}
-            <Link href="/resources/qingmeng-voice-pack" className="block group relative bg-slate-900 border border-slate-800 rounded-2xl p-6 hover:border-brand-blue/50 transition-all hover:shadow-lg hover:shadow-brand-blue/10 cursor-pointer">
-              <div className="flex items-center gap-4 mb-4">
-                <div className="w-12 h-12 bg-slate-950 rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform shrink-0">
-                  <Mic className="w-6 h-6 text-brand-blue" />
+            <Link href="/resources/qingmeng-voice-pack" className="block group relative bg-slate-900 border border-slate-800 rounded-2xl p-5 hover:border-brand-blue/50 transition-all hover:shadow-lg hover:shadow-brand-blue/10 cursor-pointer">
+              <div className="flex items-center gap-3 mb-3">
+                <div className="w-10 h-10 bg-slate-950 rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform shrink-0">
+                  <Mic className="w-5 h-5 text-brand-blue" />
                 </div>
-                <h3 className="text-xl font-bold group-hover:text-brand-blue transition-colors leading-tight">{t.card1Title}</h3>
+                <h3 className="text-lg font-bold group-hover:text-brand-blue transition-colors leading-tight">{t.card1Title}</h3>
               </div>
-              <p className="text-slate-400 text-sm">{t.card1Desc}</p>
+              <p className="text-slate-400 text-xs">{t.card1Desc}</p>
             </Link>
 
             {/* Card 2 */}
-            <Link href="/resources/trading-paints" className="group relative bg-slate-900 border border-slate-800 rounded-2xl p-6 hover:border-brand-red/50 transition-all hover:shadow-lg hover:shadow-brand-red/10 cursor-pointer">
-              <div className="flex items-center gap-4 mb-4">
-                <div className="w-12 h-12 bg-slate-950 rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform shrink-0">
-                  <Paintbrush className="w-6 h-6 text-brand-red" />
+            <Link href="/resources/trading-paints" className="group relative bg-slate-900 border border-slate-800 rounded-2xl p-5 hover:border-brand-red/50 transition-all hover:shadow-lg hover:shadow-brand-red/10 cursor-pointer">
+              <div className="flex items-center gap-3 mb-3">
+                <div className="w-10 h-10 bg-slate-950 rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform shrink-0">
+                  <Paintbrush className="w-5 h-5 text-brand-red" />
                 </div>
-                <h3 className="text-xl font-bold group-hover:text-brand-red transition-colors leading-tight">{t.card2Title}</h3>
+                <h3 className="text-lg font-bold group-hover:text-brand-red transition-colors leading-tight">{t.card2Title}</h3>
               </div>
-              <p className="text-slate-400 text-sm">{t.card2Desc}</p>
+              <p className="text-slate-400 text-xs">{t.card2Desc}</p>
             </Link>
 
             {/* Card 3 */}
-            <div className="group relative bg-slate-900 border border-slate-800 rounded-2xl p-6 hover:border-purple-500/50 transition-all hover:shadow-lg hover:shadow-purple-500/10 cursor-pointer">
-              <div className="flex items-center gap-4 mb-4">
-                <div className="w-12 h-12 bg-slate-950 rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform shrink-0">
-                  <Activity className="w-6 h-6 text-purple-500" />
+            <div className="group relative bg-slate-900 border border-slate-800 rounded-2xl p-5 hover:border-purple-500/50 transition-all hover:shadow-lg hover:shadow-purple-500/10 cursor-pointer">
+              <div className="flex items-center gap-3 mb-3">
+                <div className="w-10 h-10 bg-slate-950 rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform shrink-0">
+                  <Activity className="w-5 h-5 text-purple-500" />
                 </div>
-                <h3 className="text-xl font-bold group-hover:text-purple-500 transition-colors leading-tight">{t.card3Title}</h3>
+                <h3 className="text-lg font-bold group-hover:text-purple-500 transition-colors leading-tight">{t.card3Title}</h3>
               </div>
-              <p className="text-slate-400 text-sm">{t.card3Desc}</p>
+              <p className="text-slate-400 text-xs">{t.card3Desc}</p>
             </div>
 
           </div>
@@ -186,7 +166,7 @@ export default function Home() {
       </section>
 
       {/* Footer */}
-      <footer className="py-8 text-center text-slate-600 text-sm border-t border-slate-900 bg-brand-darker">
+      <footer className="py-4 text-center text-slate-600 text-xs border-t border-slate-900 bg-brand-darker">
         <p>{t.footer}</p>
       </footer>
     </main>
