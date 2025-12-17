@@ -1,6 +1,6 @@
 'use client';
 
-import { Search, Camera, Mic, Paintbrush, Activity, Loader2, Globe } from 'lucide-react';
+import { Search, Camera, Mic, PenLine, Paintbrush, Activity, Loader2, Globe } from 'lucide-react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useState, useRef } from 'react';
@@ -77,25 +77,25 @@ export default function Home() {
       />
 
       {/* Navigation */}
-      <nav className="flex items-center justify-between px-6 py-3 border-b border-slate-800 bg-brand-darker/50 backdrop-blur-md sticky top-0 z-50">
+      <nav className="flex items-center justify-between px-4 md:px-6 py-3 border-b border-slate-800 bg-brand-darker/50 backdrop-blur-md sticky top-0 z-50">
         <div className="flex items-center gap-2">
-          <div className="w-8 h-8 bg-brand-red skew-x-[-12deg] flex items-center justify-center font-bold italic text-white rounded-sm">iR</div>
-          <span className="text-xl font-bold tracking-tight">iRacing<span className="text-slate-400 font-normal ml-1">Wiki</span></span>
+          <div className="w-6 h-6 md:w-8 md:h-8 bg-brand-red skew-x-[-12deg] flex items-center justify-center font-bold italic text-white rounded-sm text-xs md:text-base">iR</div>
+          <span className="text-lg md:text-xl font-bold tracking-tight">iRacing<span className="text-slate-400 font-normal ml-1">Wiki</span></span>
         </div>
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-2 md:gap-4">
           <button
             onClick={() => setIsContributeOpen(true)}
-            className="flex items-center gap-2 text-sm font-medium text-slate-300 hover:text-white transition-colors bg-slate-800/50 px-3 py-1.5 rounded-full border border-slate-700 hover:border-brand-blue hover:bg-brand-blue/10"
+            className="flex items-center gap-1.5 text-xs md:text-sm font-medium text-slate-300 hover:text-white transition-colors bg-slate-800/50 px-2 md:px-3 py-1.5 rounded-xl md:rounded-full border border-slate-700 hover:border-brand-blue hover:bg-brand-blue/10"
           >
-            <Paintbrush className="w-4 h-4" />
-            <span>{t.contribute}</span>
+            <PenLine className="w-4 h-4" />
+            <span className="hidden sm:inline">{t.contribute}</span>
           </button>
           <button
             onClick={() => setLang(lang === 'zh' ? 'en' : 'zh')}
-            className="flex items-center gap-2 text-sm font-medium text-slate-300 hover:text-white transition-colors bg-slate-800/50 px-3 py-1.5 rounded-full border border-slate-700 hover:border-slate-500"
+            className="flex items-center gap-1.5 text-xs md:text-sm font-medium text-slate-300 hover:text-white transition-colors bg-slate-800/50 px-2 md:px-3 py-1.5 rounded-xl md:rounded-full border border-slate-700 hover:border-slate-500"
           >
             <Globe className="w-4 h-4" />
-            <span>{lang === 'zh' ? 'English' : '中文'}</span>
+            <span className="hidden sm:inline">{lang === 'zh' ? 'English' : '中文'}</span>
           </button>
         </div>
       </nav>
