@@ -40,6 +40,15 @@ export default async function WikiEntryPage({ params }: { params: Promise<{ slug
     // Safety fix: normalize newlines. Sometimes SQL inputs store literal "\n" string instead of newline char.
     const normalizedContent = entry.content ? entry.content.replace(/\\n/g, '\n') : '';
 
+    // Extract first image from markdown content as fallback if no image_url
+    let displayImageUrl = entry.image_url;
+    if (!displayImageUrl && normalizedContent) {
+        const imgMatch = normalizedContent.match(/!\[.*?\]\((.*?)\)/);
+        if (imgMatch && imgMatch[1]) {
+            displayImageUrl = imgMatch[1];
+        }
+    }
+
     return (
         <main className="min-h-screen bg-slate-950 flex flex-col">
             {/* Navigation - Client Component for Language state */}
@@ -50,7 +59,7 @@ export default async function WikiEntryPage({ params }: { params: Promise<{ slug
                 title={entry.title}
                 category={entry.category}
                 updatedAt={entry.updated_at}
-                imageUrl={entry.image_url}
+                imageUrl={displayImageUrl}
             />
 
             {/* Content */}

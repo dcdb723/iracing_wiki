@@ -8,6 +8,7 @@ import Link from 'next/link';
 import Pinyin from 'tiny-pinyin';
 import { useLanguage } from '@/context/LanguageContext';
 import Modal from '@/components/Modal';
+import MarkdownToolbar from '@/components/MarkdownToolbar';
 
 export default function EditorPage({ params }: { params: { id?: string[] } }) {
     const router = useRouter();
@@ -176,6 +177,43 @@ export default function EditorPage({ params }: { params: { id?: string[] } }) {
 
     if (isLoading) return <div className="p-8">{t.adminLoading}</div>;
 
+    const handleKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
+        if (e.key === 'Enter') {
+            const textarea = e.currentTarget;
+            const start = textarea.selectionStart;
+            const text = textarea.value;
+            const linesBefore = text.substring(0, start).split('\n');
+            const currentLine = linesBefore[linesBefore.length - 1];
+
+            // Check for numbered list pattern (e.g. "1. ")
+            const match = currentLine.match(/^(\d+)\.\s/);
+            if (match) {
+                e.preventDefault();
+                const nextNum = parseInt(match[1]) + 1;
+                const insertion = `\n${nextNum}. `;
+
+                const newText = text.substring(0, start) + insertion + text.substring(textarea.selectionEnd);
+                setFormData(prev => ({ ...prev, content: newText }));
+
+                // Move cursor
+                setTimeout(() => {
+                    textarea.selectionStart = textarea.selectionEnd = start + insertion.length;
+                }, 0);
+            }
+            // Check for bullet list pattern (e.g. "- ")
+            else if (currentLine.match(/^-\s/)) {
+                e.preventDefault();
+                const insertion = `\n- `;
+                const newText = text.substring(0, start) + insertion + text.substring(textarea.selectionEnd);
+                setFormData(prev => ({ ...prev, content: newText }));
+
+                setTimeout(() => {
+                    textarea.selectionStart = textarea.selectionEnd = start + insertion.length;
+                }, 0);
+            }
+        }
+    };
+
     return (
         <div className="max-w-4xl mx-auto space-y-6">
             <Modal
@@ -245,15 +283,23 @@ export default function EditorPage({ params }: { params: { id?: string[] } }) {
 
                 <div className="space-y-2">
                     <label className="text-sm font-medium text-slate-400">{t.adminContent}</label>
-                    <textarea
-                        name="content"
-                        value={formData.content}
-                        onChange={handleChange}
-                        required
-                        rows={15}
-                        className="w-full bg-slate-950 border border-slate-800 rounded-lg px-4 py-2 focus:border-brand-blue outline-none font-mono text-sm leading-relaxed"
-                        placeholder="# Heading&#10;Write your article here..."
-                    />
+                    <div className="border border-slate-800 rounded-lg overflow-hidden focus-within:border-brand-blue transition-colors bg-slate-950">
+                        <MarkdownToolbar
+                            textareaId="admin-content"
+                            onInsert={(newVal) => setFormData(prev => ({ ...prev, content: newVal }))}
+                        />
+                        <textarea
+                            id="admin-content"
+                            name="content"
+                            value={formData.content}
+                            onChange={handleChange}
+                            onKeyDown={handleKeyDown}
+                            required
+                            rows={15}
+                            className="w-full bg-slate-950 px-4 py-3 outline-none font-mono text-sm leading-relaxed border-none resize-y"
+                            placeholder={t.phContentEditor}
+                        />
+                    </div>
                 </div>
 
                 <div className="flex justify-end pt-4 border-t border-slate-800">

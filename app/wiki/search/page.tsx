@@ -3,9 +3,10 @@
 import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';
 import { useEffect, useState, Suspense } from 'react';
-import { Search, Loader2, ArrowRight, ExternalLink, Home, ArrowLeft, Globe } from 'lucide-react';
+import { Search, Loader2, ArrowRight, ExternalLink, Home, ArrowLeft, Globe, Paintbrush } from 'lucide-react';
 import { useLanguage } from '@/context/LanguageContext';
 import WikiFooter from '@/components/WikiFooter';
+import ContributeModal from '@/components/ContributeModal';
 
 function SearchResults() {
     const searchParams = useSearchParams();
@@ -16,6 +17,7 @@ function SearchResults() {
 
     const [results, setResults] = useState<any[]>([]);
     const [isLoading, setIsLoading] = useState(true);
+    const [isContributeOpen, setIsContributeOpen] = useState(false);
 
     useEffect(() => {
         const fetchResults = async () => {
@@ -51,6 +53,10 @@ function SearchResults() {
 
     return (
         <main className="min-h-screen flex flex-col bg-slate-950">
+            <ContributeModal
+                isOpen={isContributeOpen}
+                onClose={() => setIsContributeOpen(false)}
+            />
             {/* Simple Navbar - Just Identity & Language */}
             <nav className="border-b border-slate-800 bg-slate-950/80 backdrop-blur-md p-4 sticky top-0 z-50">
                 <div className="max-w-4xl mx-auto flex items-center justify-between">
@@ -194,6 +200,17 @@ function SearchResults() {
                                     <ExternalLink className="w-4 h-4" />
                                     {t.searchBaidu}
                                 </a>
+                            </div>
+
+                            <div className="pt-8 border-t border-slate-800 w-full mt-8">
+                                <p className="text-slate-400 mb-4 text-sm">{t.contributeDesc}</p>
+                                <button
+                                    onClick={() => setIsContributeOpen(true)}
+                                    className="bg-brand-blue/10 hover:bg-brand-blue/20 text-brand-blue border border-brand-blue/50 hover:border-brand-blue px-6 py-3 rounded-lg flex items-center justify-center gap-2 mx-auto transition-all"
+                                >
+                                    <Paintbrush className="w-5 h-5" />
+                                    {t.contributeTitle}
+                                </button>
                             </div>
                         </div>
                     </div>

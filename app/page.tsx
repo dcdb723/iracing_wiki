@@ -6,12 +6,14 @@ import { useRouter } from 'next/navigation';
 import { useState, useRef } from 'react';
 import { useLanguage } from '@/context/LanguageContext';
 import Modal from '@/components/Modal';
+import ContributeModal from '@/components/ContributeModal';
 
 export default function Home() {
   const router = useRouter();
   const [query, setQuery] = useState('');
   const [isSearching, setIsSearching] = useState(false);
   const [errorModal, setErrorModal] = useState({ isOpen: false, message: '' });
+  const [isContributeOpen, setIsContributeOpen] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   const { lang, setLang, t } = useLanguage();
@@ -69,6 +71,11 @@ export default function Home() {
         confirmText={t.confirm}
       />
 
+      <ContributeModal
+        isOpen={isContributeOpen}
+        onClose={() => setIsContributeOpen(false)}
+      />
+
       {/* Navigation */}
       <nav className="flex items-center justify-between px-6 py-3 border-b border-slate-800 bg-brand-darker/50 backdrop-blur-md sticky top-0 z-50">
         <div className="flex items-center gap-2">
@@ -76,6 +83,13 @@ export default function Home() {
           <span className="text-xl font-bold tracking-tight">iRacing<span className="text-slate-400 font-normal ml-1">Wiki</span></span>
         </div>
         <div className="flex items-center gap-4">
+          <button
+            onClick={() => setIsContributeOpen(true)}
+            className="flex items-center gap-2 text-sm font-medium text-slate-300 hover:text-white transition-colors bg-slate-800/50 px-3 py-1.5 rounded-full border border-slate-700 hover:border-brand-blue hover:bg-brand-blue/10"
+          >
+            <Paintbrush className="w-4 h-4" />
+            <span>{t.contribute}</span>
+          </button>
           <button
             onClick={() => setLang(lang === 'zh' ? 'en' : 'zh')}
             className="flex items-center gap-2 text-sm font-medium text-slate-300 hover:text-white transition-colors bg-slate-800/50 px-3 py-1.5 rounded-full border border-slate-700 hover:border-slate-500"

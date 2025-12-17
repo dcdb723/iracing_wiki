@@ -1,7 +1,5 @@
 # iRacing Wiki & Community Hub 🏎️
 
-An intelligent, bilingual encyclopedia and resource hub for the iRacing simulator community. Built with Next.js 14, Supabase, and AI-powered semantic search.
-
 ![iRacing Wiki Screenshot](./public/screenshot-20251217.png) 
 *(If you have a screenshot, place it in public/screenshot.png, otherwise remove this line)*
 
@@ -35,7 +33,7 @@ An intelligent, bilingual encyclopedia and resource hub for the iRacing simulato
 
 1.  Clone the repository:
     ```bash
-    git clone https://github.com/your-username/iracing-wiki.git
+    git clone https://github.com/dcdb723/iracing-wiki.git
     cd iracing-wiki
     ```
 

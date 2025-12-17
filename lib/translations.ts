@@ -10,6 +10,42 @@ export const translations = {
         loading: "加载中...",
         confirm: "确定",
         cancel: "取消",
+        contribute: "投稿",
+        contributeTitle: "提交新词条",
+        contributeDesc: "发现内容缺失？欢迎提交补充！我们会尽快审核并收录。",
+        contributeSuccess: "投稿成功！感谢您的贡献。",
+        contributeError: "提交失败，请稍后再试。",
+
+        // Form
+        formTitle: "标题",
+        formCategory: "分类",
+        formImage: "图片链接",
+        formContent: "内容 (Markdown)",
+        formSubmit: "提交审核",
+        formRateLimit: "请休息一下，1分钟后再提交哦。",
+
+        // Toolbar
+        tbParagraph: "正文",
+        tbHeading: "标题",
+        tbBold: "粗体",
+        tbItalic: "斜体",
+        tbUnderline: "下划线",
+        tbQuote: "引用",
+        tbDivider: "分割线",
+        tbListOrdered: "数字列表",
+        tbListBullet: "圆点列表",
+        tbLink: "链接",
+        tbImage: "图片",
+        tbInsertLink: "插入链接",
+        tbInsertImage: "插入图片",
+        tbUrlPlaceholder: "请输入链接...",
+        tbTextPlaceholder: "链接文字",
+        tbAltPlaceholder: "图片描述",
+        tbConfirm: "确认",
+
+        // Placeholders
+        phContentEditor: "# 标题\n在这里编写内容...",
+        phContentContribute: "# 描述\n在这里添加详细信息...",
 
         // Home
         heroTitlePrefix: "iRacing",
@@ -84,6 +120,42 @@ export const translations = {
         loading: "Loading...",
         confirm: "Confirm",
         cancel: "Cancel",
+        contribute: "Contribute",
+        contributeTitle: "Submit New Entry",
+        contributeDesc: "Missing content? Submit a request! We will review and publish it soon.",
+        contributeSuccess: "Submission successful! Thank you.",
+        contributeError: "Submission failed, please try again later.",
+
+        // Form
+        formTitle: "Title",
+        formCategory: "Category",
+        formImage: "Image URL",
+        formContent: "Content (Markdown)",
+        formSubmit: "Submit for Review",
+        formRateLimit: "Please wait 1 minute before submitting again.",
+
+        // Toolbar
+        tbParagraph: "Paragraph",
+        tbHeading: "Heading",
+        tbBold: "Bold",
+        tbItalic: "Italic",
+        tbUnderline: "Underline",
+        tbQuote: "Quote",
+        tbDivider: "Divider",
+        tbListOrdered: "Numbered List",
+        tbListBullet: "Bullet List",
+        tbLink: "Link",
+        tbImage: "Image",
+        tbInsertLink: "Insert Link",
+        tbInsertImage: "Insert Image",
+        tbUrlPlaceholder: "Enter URL...",
+        tbTextPlaceholder: "Link Text",
+        tbAltPlaceholder: "Image Description",
+        tbConfirm: "Confirm",
+
+        // Placeholders
+        phContentEditor: "# Heading\nWrite your article here...",
+        phContentContribute: "# Description\nAdd details here...",
 
         // Home
         heroTitlePrefix: "The Ultimate",
