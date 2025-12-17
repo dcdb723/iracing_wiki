@@ -5,11 +5,13 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useState, useRef } from 'react';
 import { useLanguage } from '@/context/LanguageContext';
+import Modal from '@/components/Modal';
 
 export default function Home() {
   const router = useRouter();
   const [query, setQuery] = useState('');
   const [isSearching, setIsSearching] = useState(false);
+  const [errorModal, setErrorModal] = useState({ isOpen: false, message: '' });
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   const { lang, setLang, t } = useLanguage();
@@ -44,7 +46,7 @@ export default function Home() {
         if (data.inferredQuery) {
           router.push(`/wiki/search?q=${encodeURIComponent(data.inferredQuery)}`);
         } else {
-          alert('Could not analyze image. Please try again.');
+          setErrorModal({ isOpen: true, message: 'Could not analyze image. Please try again.' });
           setIsSearching(false);
         }
       };
@@ -57,6 +59,16 @@ export default function Home() {
 
   return (
     <main className="flex flex-col min-h-screen">
+      <Modal
+        isOpen={errorModal.isOpen}
+        onClose={() => setErrorModal({ ...errorModal, isOpen: false })}
+        title="Error"
+        message={errorModal.message}
+        type="alert"
+        isDestructive={true}
+        confirmText={t.confirm}
+      />
+
       {/* Navigation */}
       <nav className="flex items-center justify-between px-6 py-3 border-b border-slate-800 bg-brand-darker/50 backdrop-blur-md sticky top-0 z-50">
         <div className="flex items-center gap-2">

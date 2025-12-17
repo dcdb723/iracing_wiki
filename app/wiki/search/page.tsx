@@ -105,29 +105,62 @@ function SearchResults() {
                         <p>{t.scanning}</p>
                     </div>
                 ) : results.length > 0 ? (
-                    <div className="grid gap-4">
-                        {results.map((item: any) => (
-                            <Link
-                                key={item.id}
-                                href={`/wiki/${item.slug}`}
-                                className="bg-slate-900/50 border border-slate-800 p-6 rounded-xl hover:border-brand-blue/50 hover:bg-slate-900 transition-all group"
-                            >
-                                <div className="flex gap-4">
-                                    {item.image_url && (
-                                        <div className="w-24 h-24 shrink-0 bg-slate-950 rounded-lg overflow-hidden hidden sm:block">
-                                            <img src={item.image_url} alt={item.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform" />
+                    <div className="space-y-12">
+                        <div className="grid gap-4">
+                            {results.map((item: any) => (
+                                <Link
+                                    key={item.id}
+                                    href={`/wiki/${item.slug}`}
+                                    className="bg-slate-900/50 border border-slate-800 p-6 rounded-xl hover:border-brand-blue/50 hover:bg-slate-900 transition-all group"
+                                >
+                                    <div className="flex gap-4">
+                                        {item.image_url && (
+                                            <div className="w-24 h-24 shrink-0 bg-slate-950 rounded-lg overflow-hidden hidden sm:block">
+                                                <img src={item.image_url} alt={item.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform" />
+                                            </div>
+                                        )}
+                                        <div className="space-y-2">
+                                            <div className="flex items-center gap-2">
+                                                <span className="px-2 py-0.5 rounded-full bg-slate-800 text-xs text-slate-400 border border-slate-700">{item.category}</span>
+                                                <h2 className="text-xl font-bold text-white group-hover:text-brand-blue transition-colors">{item.title}</h2>
+                                            </div>
+                                            <p className="text-slate-400 text-sm line-clamp-2">{item.content}</p>
                                         </div>
-                                    )}
-                                    <div className="space-y-2">
-                                        <div className="flex items-center gap-2">
-                                            <span className="px-2 py-0.5 rounded-full bg-slate-800 text-xs text-slate-400 border border-slate-700">{item.category}</span>
-                                            <h2 className="text-xl font-bold text-white group-hover:text-brand-blue transition-colors">{item.title}</h2>
-                                        </div>
-                                        <p className="text-slate-400 text-sm line-clamp-2">{item.content}</p>
                                     </div>
-                                </div>
-                            </Link>
-                        ))}
+                                </Link>
+                            ))}
+                        </div>
+
+                        {/* Fallback Search Options - Always shown now */}
+                        <div className="text-center space-y-4 pt-8 border-t border-slate-800/50">
+                            <p className="text-slate-500 text-sm">{t.fallbackSearchPrompt}</p>
+                            <div className="flex flex-wrap items-center justify-center gap-4">
+                                <a
+                                    href={externalSearchUrl('google')}
+                                    target="_blank"
+                                    className="flex items-center gap-2 bg-slate-800/50 hover:bg-slate-800 px-4 py-2 rounded-lg border border-slate-800 hover:border-slate-700 transition-colors text-sm text-slate-400 hover:text-white"
+                                >
+                                    <ExternalLink className="w-4 h-4" />
+                                    {t.searchGoogle}
+                                </a>
+                                <a
+                                    href={externalSearchUrl('bing')}
+                                    target="_blank"
+                                    className="flex items-center gap-2 bg-slate-800/50 hover:bg-slate-800 px-4 py-2 rounded-lg border border-slate-800 hover:border-slate-700 transition-colors text-sm text-slate-400 hover:text-white"
+                                >
+                                    <ExternalLink className="w-4 h-4" />
+                                    {t.searchBing}
+                                </a>
+                                <a
+                                    href={externalSearchUrl('baidu')}
+                                    target="_blank"
+                                    className="flex items-center gap-2 bg-slate-800/50 hover:bg-slate-800 px-4 py-2 rounded-lg border border-slate-800 hover:border-slate-700 transition-colors text-sm text-slate-400 hover:text-white"
+                                >
+                                    <ExternalLink className="w-4 h-4" />
+                                    {t.searchBaidu}
+                                </a>
+                            </div>
+                        </div>
                     </div>
                 ) : (
                     <div className="space-y-8">

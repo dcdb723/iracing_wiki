@@ -8,6 +8,8 @@ export const translations = {
         backToSearch: "返回",
         language: "语言",
         loading: "加载中...",
+        confirm: "确定",
+        cancel: "取消",
 
         // Home
         heroTitlePrefix: "iRacing",
@@ -34,6 +36,7 @@ export const translations = {
         searchGoogle: "搜索 Google",
         searchBing: "搜索 Bing",
         searchBaidu: "搜索百度",
+        fallbackSearchPrompt: "没找到想要的结果？试试外部搜索引擎：",
 
         // Wiki Entry
         updated: "更新于",
@@ -45,6 +48,30 @@ export const translations = {
         // Resources - Trading Paints
         tradingPaintsTitle: "Trading Paints 涂装工具",
         tradingPaintsTag: "涂装工具",
+
+        // Admin
+        adminEditEntry: "编辑词条",
+        adminNewEntry: "新建词条",
+        adminTitle: "标题",
+        adminSlug: "Slug (链接别名)",
+        adminCategory: "分类",
+        adminImage: "图片链接",
+        adminContent: "正文 (Markdown)",
+        adminSave: "保存词条",
+        adminSaving: "保存中...",
+        adminError: "保存失败：",
+        adminLoading: "加载中...",
+        adminPanel: "Admin 管理后台",
+        adminDashboard: "仪表盘",
+        adminSignOut: "退出登录",
+        adminCreateNew: "新建",
+        adminTableTitle: "标题",
+        adminTableCategory: "分类",
+        adminTableLastUpdated: "最后更新",
+        adminTableActions: "操作",
+        adminNoEntries: "暂无词条。",
+        adminDeleteConfirm: "确定要删除这个词条吗？",
+        adminDeleteTitle: "删除词条",
     },
     en: {
         // Shared
@@ -55,6 +82,8 @@ export const translations = {
         backToSearch: "Back",
         language: "Language",
         loading: "Loading...",
+        confirm: "Confirm",
+        cancel: "Cancel",
 
         // Home
         heroTitlePrefix: "The Ultimate",
@@ -81,6 +110,7 @@ export const translations = {
         searchGoogle: "Search Google",
         searchBing: "Search Bing",
         searchBaidu: "Search Baidu",
+        fallbackSearchPrompt: "Didn't find what you were looking for? Try external engines:",
 
         // Wiki Entry
         updated: "Updated",
@@ -92,6 +122,30 @@ export const translations = {
         // Resources - Trading Paints
         tradingPaintsTitle: "Trading Paints",
         tradingPaintsTag: "Livery Tool",
+
+        // Admin
+        adminEditEntry: "Edit Entry",
+        adminNewEntry: "New Entry",
+        adminTitle: "Title",
+        adminSlug: "Slug",
+        adminCategory: "Category",
+        adminImage: "Image URL",
+        adminContent: "Content (Markdown)",
+        adminSave: "Save Entry",
+        adminSaving: "Saving...",
+        adminLoading: "Loading entry...",
+        adminError: "Error saving: ",
+        adminPanel: "Admin Panel",
+        adminDashboard: "Dashboard",
+        adminSignOut: "Sign Out",
+        adminCreateNew: "Create New",
+        adminTableTitle: "Title",
+        adminTableCategory: "Category",
+        adminTableLastUpdated: "Last Updated",
+        adminTableActions: "Actions",
+        adminNoEntries: "No entries found.",
+        adminDeleteConfirm: "Are you sure you want to delete this entry?",
+        adminDeleteTitle: "Delete Entry",
     }
 };
 

@@ -4,7 +4,8 @@ import { useEffect, useState } from 'react';
 import { useRouter, usePathname } from 'next/navigation';
 import { supabase } from '@/lib/supabaseClient';
 import Link from 'next/link';
-import { LayoutDashboard, FileText, LogOut } from 'lucide-react';
+import { LayoutDashboard, FileText, LogOut, Globe } from 'lucide-react';
+import { useLanguage } from '@/context/LanguageContext';
 
 export default function AdminLayout({
     children,
@@ -13,6 +14,7 @@ export default function AdminLayout({
 }) {
     const router = useRouter();
     const pathname = usePathname();
+    const { lang, setLang, t } = useLanguage();
     const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
@@ -53,19 +55,19 @@ export default function AdminLayout({
         <div className="min-h-screen flex bg-slate-950 text-slate-100">
             {/* Sidebar */}
             <aside className="w-64 border-r border-slate-800 bg-slate-900 p-6 flex flex-col">
-                <div className="mb-8">
-                    <div className="w-8 h-8 bg-brand-red skew-x-[-12deg] flex items-center justify-center font-bold italic text-white rounded-sm mb-2">iR</div>
-                    <h1 className="text-xl font-bold">Admin Panel</h1>
+                <div className="mb-8 flex items-center gap-3">
+                    <div className="w-8 h-8 bg-brand-red skew-x-[-12deg] flex items-center justify-center font-bold italic text-white rounded-sm shrink-0">iR</div>
+                    <h1 className="text-xl font-bold">{t.adminPanel}</h1>
                 </div>
 
                 <nav className="space-y-2 flex-1">
                     <Link href="/admin" className={`flex items-center gap-3 px-4 py-2 rounded-lg transition-colors ${pathname === '/admin' ? 'bg-brand-blue text-white' : 'text-slate-400 hover:bg-slate-800 hover:text-white'}`}>
                         <LayoutDashboard className="w-5 h-5" />
-                        Dashboard
+                        {t.adminDashboard}
                     </Link>
                     <Link href="/admin/editor" className={`flex items-center gap-3 px-4 py-2 rounded-lg transition-colors ${pathname.includes('/admin/editor') ? 'bg-brand-blue text-white' : 'text-slate-400 hover:bg-slate-800 hover:text-white'}`}>
                         <FileText className="w-5 h-5" />
-                        New Entry
+                        {t.adminNewEntry}
                     </Link>
                 </nav>
 
@@ -74,8 +76,18 @@ export default function AdminLayout({
                     className="flex items-center gap-3 px-4 py-2 rounded-lg text-slate-400 hover:bg-slate-800 hover:text-red-400 transition-colors mt-auto"
                 >
                     <LogOut className="w-5 h-5" />
-                    Sign Out
+                    {t.adminSignOut}
                 </button>
+
+                <div className="mt-4 pt-4 border-t border-slate-800">
+                    <button
+                        onClick={() => setLang(lang === 'zh' ? 'en' : 'zh')}
+                        className="flex items-center gap-3 px-4 py-2 rounded-lg text-slate-400 hover:text-white transition-colors w-full text-left"
+                    >
+                        <Globe className="w-5 h-5" />
+                        <span>{lang === 'zh' ? 'English' : '中文'}</span>
+                    </button>
+                </div>
             </aside>
 
             {/* Main Content */}
