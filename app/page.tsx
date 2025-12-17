@@ -118,7 +118,18 @@ export default function Home() {
           <div className="absolute inset-0 bg-slate-950/30" />
         </div>
 
-        <img src="/logo.png" alt="iRacing Wiki Logo" className="w-32 h-32 md:w-80 md:h-80 object-contain relative z-10 mb-4 md:mb-6 rounded-[2.5rem] md:rounded-[4rem] shadow-2xl shadow-brand-red/20 border-2 border-slate-800/50" />
+        <div className="relative z-10 mb-4 md:mb-6">
+          <img
+            src="/logo.png"
+            alt="iRacing Wiki Logo"
+            className="w-32 h-32 md:w-48 md:h-48 object-contain rounded-[2.5rem] md:rounded-[3rem]"
+            style={{
+              filter: 'drop-shadow(0 25px 50px rgba(239, 68, 68, 0.15))',
+              maskImage: 'radial-gradient(circle, black 85%, transparent 100%)',
+              WebkitMaskImage: 'radial-gradient(circle, black 85%, transparent 100%)'
+            }}
+          />
+        </div>
 
         <h1 className="text-4xl md:text-5xl font-extrabold tracking-tight relative z-10">
           {lang === 'en' ? (

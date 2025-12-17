@@ -42,6 +42,9 @@ export const translations = {
         tbTextPlaceholder: "链接文字",
         tbAltPlaceholder: "图片描述",
         tbConfirm: "确认",
+        tbVideo: "视频",
+        tbInsertVideo: "插入视频",
+        tbVideoUrlPlaceholder: "YouTube 或 Bilibili 链接",
 
         // Placeholders
         phContentEditor: "# 标题\n在这里编写内容...",
@@ -152,6 +155,9 @@ export const translations = {
         tbTextPlaceholder: "Link Text",
         tbAltPlaceholder: "Image Description",
         tbConfirm: "Confirm",
+        tbVideo: "Video",
+        tbInsertVideo: "Insert Video",
+        tbVideoUrlPlaceholder: "YouTube or Bilibili URL",
 
         // Placeholders
         phContentEditor: "# Heading\nWrite your article here...",

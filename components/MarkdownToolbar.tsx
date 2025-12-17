@@ -2,7 +2,7 @@
 
 import {
     Bold, Italic, Underline, Quote,
-    List, ListOrdered, Minus, Link as LinkIcon, Image as ImageIcon,
+    List, ListOrdered, Minus, Link as LinkIcon, Image as ImageIcon, Video,
     ChevronDown, X, Check
 } from 'lucide-react';
 import { useState, useRef, useEffect } from 'react';
@@ -15,7 +15,7 @@ interface MarkdownToolbarProps {
 
 export default function MarkdownToolbar({ textareaId, onInsert }: MarkdownToolbarProps) {
     const { t } = useLanguage();
-    const [activePopup, setActivePopup] = useState<'link' | 'image' | null>(null);
+    const [activePopup, setActivePopup] = useState<'link' | 'image' | 'video' | null>(null);
     const [headerLevel, setHeaderLevel] = useState('Paragraph');
 
     // Popup State
@@ -126,19 +126,50 @@ export default function MarkdownToolbar({ textareaId, onInsert }: MarkdownToolba
             }
         } else if (activePopup === 'image') {
             insertText(`![${popupText || t.tbImage}](${popupUrl})`);
+        } else if (activePopup === 'video') {
+            const embedUrl = parseVideoUrl(popupUrl);
+            if (embedUrl) {
+                insertText(`<div class="video-container">\n  <iframe src="${embedUrl}" allowfullscreen></iframe>\n</div>`);
+            } else {
+                alert('Invalid video URL. Only YouTube and Bilibili are supported.');
+            }
         }
         setActivePopup(null);
         setPopupUrl('');
         setPopupText('');
     };
 
-    const openPopup = (type: 'link' | 'image') => {
+    const openPopup = (type: 'link' | 'image' | 'video') => {
         const textarea = document.getElementById(textareaId) as HTMLTextAreaElement;
         const selection = textarea?.value.substring(textarea.selectionStart, textarea.selectionEnd);
-        if (selection) setPopupText(selection);
+        if (selection && type !== 'video') setPopupText(selection);
 
         setActivePopup(type);
         setPopupUrl(''); // Reset URL
+        setPopupText(''); // Reset text
+    };
+
+    const parseVideoUrl = (url: string): string | null => {
+        // YouTube patterns
+        const youtubeRegex = /(?:youtube\.com\/watch\?v=|youtu\.be\/)([a-zA-Z0-9_-]+)/;
+        const youtubeMatch = url.match(youtubeRegex);
+        if (youtubeMatch) {
+            return `https://www.youtube.com/embed/${youtubeMatch[1]}`;
+        }
+
+        // Bilibili pattern
+        const biliRegex = /bilibili\.com\/video\/(BV[a-zA-Z0-9]+)/;
+        const biliMatch = url.match(biliRegex);
+        if (biliMatch) {
+            let embedUrl = `https://player.bilibili.com/player.html?bvid=${biliMatch[1]}&high_quality=1`;
+            // Only add autoplay=false if not already present
+            if (!embedUrl.includes('autoplay=')) {
+                embedUrl += '&autoplay=false';
+            }
+            return embedUrl;
+        }
+
+        return null;
     };
 
     return (
@@ -179,6 +210,7 @@ export default function MarkdownToolbar({ textareaId, onInsert }: MarkdownToolba
 
             <ToolBtn icon={LinkIcon} label={t.tbLink} active={activePopup === 'link'} onClick={() => openPopup('link')} />
             <ToolBtn icon={ImageIcon} label={t.tbImage} active={activePopup === 'image'} onClick={() => openPopup('image')} />
+            <ToolBtn icon={Video} label={t.tbVideo} active={activePopup === 'video'} onClick={() => openPopup('video')} />
 
             {/* Popover */}
             {activePopup && (
@@ -186,7 +218,7 @@ export default function MarkdownToolbar({ textareaId, onInsert }: MarkdownToolba
                     <div className="space-y-3">
                         <div className="flex items-center justify-between border-b border-slate-800 pb-2">
                             <span className="text-xs font-bold text-slate-400 uppercase tracking-wider">
-                                {activePopup === 'link' ? t.tbInsertLink : t.tbInsertImage}
+                                {activePopup === 'link' ? t.tbInsertLink : activePopup === 'image' ? t.tbInsertImage : t.tbInsertVideo}
                             </span>
                             <button onClick={() => setActivePopup(null)} className="text-slate-500 hover:text-white">
                                 <X className="w-4 h-4" />
@@ -199,25 +231,24 @@ export default function MarkdownToolbar({ textareaId, onInsert }: MarkdownToolba
                                 autoFocus
                                 value={popupUrl}
                                 onChange={e => setPopupUrl(e.target.value)}
-                                placeholder={t.tbUrlPlaceholder}
+                                placeholder={activePopup === 'video' ? t.tbVideoUrlPlaceholder : t.tbUrlPlaceholder}
                                 className="w-full bg-slate-950 border border-slate-800 rounded px-2 py-1.5 text-sm text-white focus:border-brand-blue outline-none"
                                 onKeyDown={e => e.key === 'Enter' && confirmPopup()}
                             />
                         </div>
 
-                        {!document.getElementById(textareaId)?.getAttribute('selectionEnd') // Show text input only if simpler? Actually let's just always show for flexibility
-                            && (
-                                <div className="space-y-1">
-                                    <label className="text-[10px] text-slate-500 font-medium">{activePopup === 'link' ? t.tbTextPlaceholder : t.tbAltPlaceholder}</label>
-                                    <input
-                                        value={popupText}
-                                        onChange={e => setPopupText(e.target.value)}
-                                        placeholder={activePopup === 'link' ? t.tbTextPlaceholder : t.tbAltPlaceholder}
-                                        className="w-full bg-slate-950 border border-slate-800 rounded px-2 py-1.5 text-sm text-white focus:border-brand-blue outline-none"
-                                        onKeyDown={e => e.key === 'Enter' && confirmPopup()}
-                                    />
-                                </div>
-                            )}
+                        {activePopup !== 'video' && (
+                            <div className="space-y-1">
+                                <label className="text-[10px] text-slate-500 font-medium">{activePopup === 'link' ? t.tbTextPlaceholder : t.tbAltPlaceholder}</label>
+                                <input
+                                    value={popupText}
+                                    onChange={e => setPopupText(e.target.value)}
+                                    placeholder={activePopup === 'link' ? t.tbTextPlaceholder : t.tbAltPlaceholder}
+                                    className="w-full bg-slate-950 border border-slate-800 rounded px-2 py-1.5 text-sm text-white focus:border-brand-blue outline-none"
+                                    onKeyDown={e => e.key === 'Enter' && confirmPopup()}
+                                />
+                            </div>
+                        )}
 
                         <button
                             onClick={confirmPopup}
