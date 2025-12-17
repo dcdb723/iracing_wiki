@@ -101,13 +101,24 @@ export default function Home() {
       </nav>
 
       {/* Hero Section */}
-      <section className="flex-1 flex flex-col items-center justify-center px-4 py-8 md:py-10 text-center space-y-6 relative overflow-hidden min-h-0">
+      <section className="flex-1 flex flex-col items-center justify-center px-4 py-4 md:py-6 text-center space-y-6 relative overflow-hidden min-h-0">
 
-        {/* Decorative Background Elements - Scaled down */}
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-brand-blue/5 rounded-full blur-3xl pointer-events-none" />
-        <div className="absolute top-1/4 right-0 w-[300px] h-[300px] bg-brand-red/5 rounded-full blur-3xl pointer-events-none" />
+        {/* Video Background */}
+        <div className="absolute inset-0 w-full h-full overflow-hidden">
+          <video
+            autoPlay
+            loop
+            muted
+            playsInline
+            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 min-w-full min-h-full w-auto h-auto object-cover"
+          >
+            <source src="https://s100.iracing.com/wp-content/uploads/2024/11/iracing-sizzle-reel-july-2024-home.mp4" type="video/mp4" />
+          </video>
+          {/* Dark overlay to ensure text readability */}
+          <div className="absolute inset-0 bg-slate-950/30" />
+        </div>
 
-        <img src="/logo.png" alt="iRacing Wiki Logo" className="w-24 h-24 md:w-32 md:h-32 object-contain relative z-10 mb-2 rounded-[2rem] shadow-2xl shadow-brand-red/20 border-2 border-slate-800/50" />
+        <img src="/logo.png" alt="iRacing Wiki Logo" className="w-32 h-32 md:w-80 md:h-80 object-contain relative z-10 mb-4 md:mb-6 rounded-[2.5rem] md:rounded-[4rem] shadow-2xl shadow-brand-red/20 border-2 border-slate-800/50" />
 
         <h1 className="text-4xl md:text-5xl font-extrabold tracking-tight relative z-10">
           {lang === 'en' ? (
